@@ -9,10 +9,32 @@ DEL name 				// deletes pair <name,"John">
 SET counter 100				// creates pair <counter,100>
 INCRBY counter 20			// increments counter by 20 => counter = 120
 
+// HASHES
 MSET a 1 b 5 c 20			// creates hashtable with pairs: <a,1> , <b,5>, <c,20>
 MGET a b c 				// retruns 1, 5, 20
 
 HMSET user id 45 name "Jonny"		// creates pair <user, HashTable>, where HashTable contains pairs <id,45> , <name, "Jonny">
 HGET user id 				// returns 45
-HMGET user id name 			// returns 45 , "Jonny"
+HMGET user id name 			// returns 45, "Jonny"
+HGETALL user				// returns all data: id, 45, name, "Jonny"
 
+//LISTS
+LPUSH myList 10
+RPUSH myList 20
+LRANGE myList 0 1   			// returns 10, 20
+LTRIM myList start stop
+LPOP myList
+
+// SETS & SORTED SETS
+// SETS
+SADD mySet 1 2 3 4 5			// creates mySet and add 1 2 3 4 5
+SMEMBERS mySet                        	// returns mySet members
+SISMEMBER mySet 4			// verifies if 4 is member of mySet
+// SORTED SETS
+ZADD team 50 "Wizards"			// adds to team ordered set a new value, "Wizards", with score 50
+ZADD team 40 "Cavaliers"		// adds to team ordered set a new value, "Cavaliers", with score 40
+ZADD team 1 "Bolts"			// adds to team ordered set a new value, "Bolts", with score 1
+ZRANGE team 0 5				// returns first 5 values from set
+					// "Bolts", "Cavaliers", "Wizards"
+					// ***the values are sorted based on their scores***
+ZRANK team "Wizards"			// returns 2, because "Wizard" has third smallest value.
